@@ -1,0 +1,264 @@
+/*
+  PERSONAL KITCHEN REFERENCE — WORD-INSPIRED STYLESHEET
+  -------------------------------------------------------------------
+  This stylesheet is deliberately written for the semantic, class-free
+  cookbook HTML. It does not require changing any recipe or HTML tags.
+  Colors, sizes, and table treatments are approximated from the Word
+  edition. All lengths are print-friendly, and the screen view resembles
+  a US-letter sheet of paper.
+*/
+
+:root {
+  --ink: #28322e;
+  --forest: #21473f;
+  --muted: #65756e;
+  --stripe: #edf2ef;
+  --pale-green: #eaf3ee;
+  --blue-rule: #4482c5;
+  --paper: #ffffff;
+  --outside: #e8ece9;
+}
+
+html {
+  background: var(--outside);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  box-sizing: border-box;
+  width: 8.5in;
+  max-width: 100%;
+  margin: 32px auto;
+  padding: 0.65in 0.7in 0.7in;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Noto Serif", Cambria, Georgia, serif;
+  font-size: 9.5pt;
+  font-weight: 400;
+  line-height: 1.30;
+  box-shadow: 0 3px 24px rgb(24 48 39 / 12%);
+}
+
+/* The HTML includes a book title not printed as a separate cover title
+   in the Word chapter pages. Treat it as the small running masthead. */
+h1 {
+  font: 400 8pt/1.3 "Noto Serif", Georgia, serif;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 18pt;
+}
+
+/* Chapter headings: Word's large dark-green display type and thin blue rule. */
+h2 {
+  color: var(--forest);
+  font-family: Carlito, "Aptos Display", Calibri, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 22pt;
+  line-height: 1.1;
+  margin: 19pt 0 9pt;
+  padding: 0 0 5pt;
+  border-bottom: 1.25pt solid var(--blue-rule);
+  break-after: avoid-page;
+}
+
+/* Subheads and recipe names. A recipe with an eyebrow immediately after
+   its title follows the Word document's slightly more traditional style. */
+h3 {
+  color: var(--forest);
+  font: 700 12.5pt/1.18 Carlito, Calibri, Arial, sans-serif;
+  margin: 12pt 0 5pt;
+  break-after: avoid-page;
+}
+
+h3:has(+ p > strong:only-child) {
+  font-family: "Noto Serif", Georgia, serif;
+  font-size: 13pt;
+}
+
+/* Eyebrows such as "THE 5–5–5 METHOD" or "500 FOR 50". */
+h2 + p:has(> strong:only-child),
+h3 + p:has(> strong:only-child) {
+  margin: 1pt 0 5pt;
+  font: 700 8pt/1.2 Carlito, Calibri, sans-serif;
+  color: var(--muted);
+  letter-spacing: 0.025em;
+}
+
+h2 + p:has(> strong:only-child) strong,
+h3 + p:has(> strong:only-child) strong {
+  color: inherit;
+}
+
+p { margin: 0 0 5pt; }
+
+p > em:only-child { font-style: italic; }
+strong, b { font-weight: 700; }
+em, i { font-style: italic; }
+
+a {
+  color: #235d83;
+  text-decoration: underline;
+  text-underline-offset: 0.11em;
+  overflow-wrap: anywhere;
+}
+a:hover { color: #143a54; }
+
+/* All and only the short subsection headings are <h4>.
+   For label + paragraph pairs, the Word document puts label and copy
+   on the same line. The CSS recreates that without extra HTML wrappers. */
+h4 {
+  color: var(--forest);
+  font: 700 8.8pt/1.3 "Noto Serif", Cambria, Georgia, serif;
+  margin: 5pt 0 2pt;
+  break-after: avoid-page;
+}
+
+h4:has(+ p) {
+  display: inline;
+  margin: 0;
+  padding: 0 0.35em 0 0;
+}
+
+h4 + p {
+  display: inline;
+  line-height: 1.3;
+}
+
+/* One line break after the short labeled paragraph. */
+h4 + p::after {
+  content: "";
+  display: block;
+  margin-bottom: 5pt;
+}
+
+/* "Instructions" labels are stand-alone, before a numbered list. */
+h4:has(+ ol) {
+  display: block;
+  margin-top: 7pt;
+  margin-bottom: 3pt;
+}
+
+ol, ul {
+  margin: 2pt 0 7pt;
+  padding-left: 1.45em;
+}
+
+li { padding-left: 0.05em; margin: 0 0 3pt; }
+li::marker { font-weight: 700; color: var(--ink); }
+
+/* Reference tables: dark green banding, light alternating rows,
+   restrained padding and little/no gridline clutter. */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 6pt 0 12pt;
+  table-layout: fixed; /* Word tables generally use equal-width columns */
+  font-family: "Noto Serif", Cambria, Georgia, serif;
+  font-size: 8.55pt;
+  line-height: 1.20;
+  break-inside: auto;
+}
+
+thead { display: table-header-group; }
+tfoot { display: table-footer-group; }
+
+tr { break-inside: avoid; }
+
+th {
+  padding: 3pt 5pt 3pt;
+  text-align: left;
+  vertical-align: top;
+  background: var(--forest);
+  color: #fff;
+  font-weight: 700;
+  border-right: 0.75pt solid rgba(255,255,255,.6);
+}
+th:last-child { border-right: 0; }
+
+td {
+  padding: 4.3pt 5pt;
+  vertical-align: top;
+  border: 0;
+}
+
+tbody tr:nth-child(even) { background: var(--stripe); }
+
+/* Label columns in look-up tables are usually bold in the Word edition. */
+table:not(:has(tbody tr:only-child)) td:first-child { font-weight: 700; }
+
+/* The one-data-row tables are the prominent pressure cooker / bake-time
+   strips. We can identify them structurally, without classes or IDs. */
+table:has(> tbody > tr:only-child) {
+  margin: 4pt 0 13pt;
+  background: var(--pale-green);
+  break-inside: avoid;
+}
+
+table:has(> tbody > tr:only-child) th {
+  background: var(--pale-green);
+  color: var(--forest);
+  padding: 5pt 8pt 1pt;
+  border: 0;
+  font: 700 7.9pt/1.15 Carlito, Calibri, sans-serif;
+}
+
+table:has(> tbody > tr:only-child) td {
+  padding: 2pt 8pt 7pt;
+  background: var(--pale-green);
+  color: var(--forest);
+  font: 700 19pt/1.1 "Noto Serif", Georgia, serif;
+  white-space: normal;
+}
+
+/* Table and heading should not be separated by a page break. */
+h3 + table, h3 + p + table { break-before: avoid-page; }
+
+/* Mobile layout: ordinary responsive text while retaining real tables. */
+@media screen and (max-width: 730px) {
+  body {
+    width: 100%;
+    margin: 0;
+    padding: 24px 20px 44px;
+    box-shadow: none;
+  }
+  h2 { font-size: 21pt; }
+  h3 { font-size: 12pt; }
+  table { font-size: 8pt; }
+  td, th { padding-left: 4pt; padding-right: 4pt; }
+  table:has(> tbody > tr:only-child) td { font-size: 15pt; }
+}
+
+/* Printed edition: US letter, Word's ~0.7in side margins,
+   repeat table headings, preserve each recipe as best the browser can. */
+@page {
+  size: letter;
+  margin: 0.68in 0.7in 0.64in;
+  @bottom-center {
+    content: "Kitchen reference  •  Working draft";
+    color: #65756e;
+    font-family: "Noto Serif", Georgia, serif;
+    font-size: 8pt;
+  }
+}
+
+@media print {
+  html { background: white; }
+  body {
+    width: auto;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    background: #fff;
+  }
+  h1 { margin-bottom: 11pt; }
+  h2 { break-before: page; margin-top: 0; }
+  h2:first-of-type { break-before: auto; }
+  h3, h4, th, tr { break-inside: avoid-page; }
+  ol, ul { break-before: avoid-page; }
+  a { color: var(--forest); }
+  a::after { content: none; }
+  /* Dark table headers stay dark in print. */
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
