@@ -1,5 +1,9 @@
 # Simple Recipe Cookbook
 
+You can view this book directly here:
+
+https://johnnyb.github.io/cookbook/MainBook.html
+
 I like simple recipes.
 Most cookbooks over-complicate things.
 The goal here is to present the minimum recipe and procedure in order to make it easy to make, easy to remember, and easy to modify.
